@@ -8,7 +8,7 @@ from itertools import permutations
 seed_words = ''
 address = ''
 start_index = 1250
-sequential = TRUE
+sequential = True
 
 def _create_standard_wallet(ks):
     gap_limit = 1  # make tests run faster
