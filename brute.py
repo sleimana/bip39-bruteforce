@@ -40,5 +40,5 @@ for p in permutations(words, 9):
 		if (i<start_index):
 			continue
 		pwd = "".join(str(x) for x in p)
-		check_pass(str(pwd),str(i))
+		check_bip39_seed_bip49_p2sh_segwit(str(pwd),str(i))
 
