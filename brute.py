@@ -8,6 +8,7 @@ from itertools import permutations
 seed_words = ''
 address = ''
 start_index = 1250
+sequential = TRUE
 
 def _create_standard_wallet(ks):
     gap_limit = 1  # make tests run faster
@@ -22,23 +23,30 @@ def check_bip39_seed_bip49_p2sh_segwit(password, index):
     
     ks = from_bip39_seed(seed_words, password, "m/49'/0'/0'")
     w = _create_standard_wallet(ks)
-	addr = w.get_receiving_addresses()[0]
+    addr = w.get_receiving_addresses()[0]
 	
     if (addr == address):
-		print(index + '\t PASSWORD FOUND: ' + password)
+        print(index + '\t PASSWORD FOUND: ' + password)
         return True
     else:
-		print(index +'\t'+ str(addr)+ '\t' + password)
+        print(index +'\t'+ str(addr)+ '\t' + password)
         return False
 
 
-pin = '1 2 3 4 5 6 7 8 9'
-words = pin.split()
-i=0
-for p in permutations(words, 9):
-		i=i+1
-		if (i<start_index):
-			continue
-		pwd = "".join(str(x) for x in p)
-		check_bip39_seed_bip49_p2sh_segwit(str(pwd),str(i))
+if (sequential):
+	for i in range(0,9999):
+	   pwd = str(i).zfill(4)
+	   print()
+	   #check_bip39_seed_bip49_p2sh_segwit(str(pwd),str(i))
+	
+else:
+    pin = '1 2 3 4 5 6 7 8 9'
+    words = pin.split()
+    i=0
+    for p in permutations(words, 9):
+		    i=i+1
+		    if (i<start_index):
+			    continue
+		    pwd = "".join(str(x) for x in p)
+		    check_bip39_seed_bip49_p2sh_segwit(str(pwd),str(i))
 
